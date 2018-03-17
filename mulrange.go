@@ -8,15 +8,12 @@ import (
 // the given number by utilizing Int.MulRange
 // for multiplication.
 func MulRangeFact(n uint64) *big.Int {
-	if n == 0 {
-		return big.NewInt(1)
+	if n < 3 {
+		retval, _ := miniFact(n)
+		return retval
 	}
 
-	bigN := big.NewInt(int64(n))
-	if n == 1 || n == 2 {
-		return bigN
-	}
-
+	// n > 2
 	res := big.NewInt(1)
 	return res.MulRange(2, int64(n))
 }

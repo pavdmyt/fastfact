@@ -11,19 +11,14 @@ import (
 // Details:
 // http://pavdmyt.com/digging-around-factorial-function/
 func HalfIterFact(n uint64) *big.Int {
-	// 0
+	if n < 3 {
+		retval, _ := miniFact(n)
+		return retval
+	}
+
+	// n > 2
 	one := big.NewInt(1)
-	if n == 0 {
-		return one
-	}
-
-	// 1 or 2
 	bigN := big.NewInt(int64(n))
-	if n == 1 || n == 2 {
-		return bigN
-	}
-
-	// other
 	var res *big.Int
 
 	// Handle odd input
