@@ -21,17 +21,25 @@ func main() {
 Results
 -------
 
-## MulRangeFact implementation
+### MulRangeFact implementation
 
 ```
-time go run main.go
+$ time go run main.go
 go run main.go  3.30s user 0.27s system 104% cpu 3.416 total
 ```
 
 
-## IterFact
+### HalfIterFact
 
 ```
-time go run main.go
+$ time go run main.go
+go run main.go  61.11s user 3.35s system 114% cpu 56.375 total
+```
+
+
+### IterFact
+
+```
+$ time go run main.go
 go run main.go  108.76s user 3.61s system 108% cpu 1:44.01 total
 ```

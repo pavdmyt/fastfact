@@ -26,7 +26,6 @@ func TestMulRangeFact(t *testing.T) {
 			t.Fatalf("found %v, want %v", res, test.out)
 		}
 	}
-
 }
 
 func TestIterFact(t *testing.T) {
@@ -36,5 +35,13 @@ func TestIterFact(t *testing.T) {
 			t.Fatalf("found %v, want %v", res, test.out)
 		}
 	}
+}
 
+func TestHalfIterFact(t *testing.T) {
+	for _, test := range testCases {
+		res := HalfIterFact(test.in)
+		if res.Cmp(test.out) != 0 {
+			t.Fatalf("found %v, want %v", res, test.out)
+		}
+	}
 }
