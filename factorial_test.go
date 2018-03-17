@@ -19,9 +19,19 @@ var testCases = []struct {
 	{12, big.NewInt(479001600)},
 }
 
-func TestFactorial(t *testing.T) {
+func TestMulRangeFact(t *testing.T) {
 	for _, test := range testCases {
-		res := Factorial(test.in)
+		res := MulRangeFact(test.in)
+		if res.Cmp(test.out) != 0 {
+			t.Fatalf("found %v, want %v", res, test.out)
+		}
+	}
+
+}
+
+func TestIterFact(t *testing.T) {
+	for _, test := range testCases {
+		res := IterFact(test.in)
 		if res.Cmp(test.out) != 0 {
 			t.Fatalf("found %v, want %v", res, test.out)
 		}

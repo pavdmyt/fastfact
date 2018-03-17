@@ -4,8 +4,10 @@ import (
 	"math/big"
 )
 
-// Factorial returns the factorial of the given number.
-func Factorial(n uint64) *big.Int {
+// MulRangeFact calculates factorial of
+// the given number by utilizing Int.MulRange
+// for multiplication.
+func MulRangeFact(n uint64) *big.Int {
 	if n == 0 {
 		return big.NewInt(1)
 	}
