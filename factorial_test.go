@@ -48,10 +48,12 @@ func TestHalfIterFact(t *testing.T) {
 }
 
 func TestConcFact(t *testing.T) {
-	for _, test := range testCases {
-		res := ConcFact(test.in, 4)
-		if res.Cmp(test.out) != 0 {
-			t.Fatalf("found %v, want %v", res, test.out)
+	for numW := 1; numW <= 20; numW++ { // number of workers
+		for _, test := range testCases {
+			res := ConcFact(test.in, uint64(numW))
+			if res.Cmp(test.out) != 0 {
+				t.Fatalf("found %v, want %v; numW: %v", res, test.out, numW)
+			}
 		}
 	}
 }
