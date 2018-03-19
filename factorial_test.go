@@ -17,21 +17,21 @@ var testCases = []struct {
 	{8, big.NewInt(40320)},
 	{10, big.NewInt(3628800)},
 	{12, big.NewInt(479001600)},
-	{25, MulRangeFact(25)},
+	{25, SimpleFactFast(25)},
 }
 
-func TestMulRangeFact(t *testing.T) {
+func TestSimpleFactFast(t *testing.T) {
 	for _, test := range testCases {
-		res := MulRangeFact(test.in)
+		res := SimpleFactFast(test.in)
 		if res.Cmp(test.out) != 0 {
 			t.Fatalf("found %v, want %v", res, test.out)
 		}
 	}
 }
 
-func TestIterFact(t *testing.T) {
+func TestSimpleFactIter(t *testing.T) {
 	for _, test := range testCases {
-		res := IterFact(test.in)
+		res := SimpleFactIter(test.in)
 		if res.Cmp(test.out) != 0 {
 			t.Fatalf("found %v, want %v", res, test.out)
 		}
