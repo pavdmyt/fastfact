@@ -12,5 +12,5 @@ func IterFact(n uint64) *big.Int {
 		retval, _ := miniFact(n)
 		return retval
 	}
-	return mulRange(1, n)
+	return mulRangeIter(1, n)
 }

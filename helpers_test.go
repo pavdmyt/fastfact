@@ -78,9 +78,18 @@ func TestNumToRanges(t *testing.T) {
 	}
 }
 
-func TestMulRange(t *testing.T) {
+func TestMulRangeIter(t *testing.T) {
 	for _, test := range mulRangeCases {
-		res := mulRange(test.a, test.b)
+		res := mulRangeIter(test.a, test.b)
+		if res.Cmp(test.out) != 0 {
+			t.Fatalf("found %v, want %v", res, test.out)
+		}
+	}
+}
+
+func TestMulRangeFast(t *testing.T) {
+	for _, test := range mulRangeCases {
+		res := mulRangeFast(test.a, test.b)
 		if res.Cmp(test.out) != 0 {
 			t.Fatalf("found %v, want %v", res, test.out)
 		}

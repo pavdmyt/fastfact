@@ -4,12 +4,29 @@ import (
 	"math/big"
 )
 
-// ConcFact calculates factorial of the given
+// ConcFactIter calculates factorial of the given
 // number by splitting the task between workers
 // for doing the work concurrently. At multi-core
 // machines workers are making calculations in
 // parallel.
-func ConcFact(n, workerNum uint64) *big.Int {
+//
+// Utilizes slow backend for multiplication: mulRangeIter.
+func ConcFactIter(n, workerNum uint64) *big.Int {
+	return concFact(n, workerNum, mulRangeIter)
+}
+
+// ConcFactFast calculates factorial of the given
+// number by splitting the task between workers
+// for doing the work concurrently. At multi-core
+// machines workers are making calculations in
+// parallel.
+//
+// Utilizes fast backend for multiplication: mulRangeFast.
+func ConcFactFast(n, workerNum uint64) *big.Int {
+	return concFact(n, workerNum, mulRangeFast)
+}
+
+func concFact(n uint64, workerNum uint64, fn func(a, b uint64) *big.Int) *big.Int {
 	if n < 3 {
 		retval, _ := miniFact(n)
 		return retval
@@ -19,7 +36,7 @@ func ConcFact(n, workerNum uint64) *big.Int {
 
 	// No need for concurrency in such case
 	if n/workerNum < 2 {
-		return mulRange(1, n)
+		return fn(1, n)
 	}
 
 	ranges := numToRanges(n, workerNum) // split work
@@ -29,7 +46,7 @@ func ConcFact(n, workerNum uint64) *big.Int {
 	for _, rng := range ranges {
 		a, b := rng[0], rng[1]
 		go func() {
-			ch <- mulRange(a, b)
+			ch <- fn(a, b)
 			done <- true
 		}()
 	}
