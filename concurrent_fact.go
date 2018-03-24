@@ -58,9 +58,9 @@ func concFact(n uint64, workerNum uint64, fn func(a, b uint64) *big.Int) *big.In
 		close(ch)
 	}()
 
-	res := big.NewInt(1)
+	total := big.NewInt(1)
 	for num := range ch {
-		res.Mul(res, num)
+		total.Mul(total, num)
 	}
-	return res
+	return total
 }

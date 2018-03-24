@@ -68,14 +68,14 @@ func numToRanges(num, workerNum uint64) [][]uint64 {
 //
 // Utilizes iterative multiplication, slow.
 func mulRangeIter(a, b uint64) *big.Int {
-	res := big.NewInt(1)
+	total := big.NewInt(1)
 	if a > b {
-		return res
+		return total
 	}
 	for i := a; i <= b; i++ {
-		res.Mul(res, big.NewInt(int64(i)))
+		total.Mul(total, big.NewInt(int64(i)))
 	}
-	return res
+	return total
 }
 
 // mulRangeFast returns the product of all
@@ -84,6 +84,6 @@ func mulRangeIter(a, b uint64) *big.Int {
 //
 // Utilizes big.Int.MulRange, fast.
 func mulRangeFast(a, b uint64) *big.Int {
-	res := big.NewInt(1)
-	return res.MulRange(int64(a), int64(b))
+	total := big.NewInt(1)
+	return total.MulRange(int64(a), int64(b))
 }

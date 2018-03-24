@@ -19,14 +19,14 @@ func HalfIterFact(n uint64) *big.Int {
 	// n > 2
 	one := big.NewInt(1)
 	bigN := big.NewInt(int64(n))
-	var res *big.Int
+	var total *big.Int
 
 	// Handle odd input
 	if n%2 == 1 {
-		res = big.NewInt(int64(n))
+		total = big.NewInt(int64(n))
 		bigN.Sub(bigN, one) // bigN -= 1
 	} else {
-		res = one
+		total = one
 	}
 
 	zero := big.NewInt(0)
@@ -35,8 +35,8 @@ func HalfIterFact(n uint64) *big.Int {
 
 	for bigN.Cmp(zero) == 1 { // bigN > 0
 		i.Add(i, bigN)      // i += bigN
-		res.Mul(res, i)     // res *= i
+		total.Mul(total, i) // total *= i
 		bigN.Sub(bigN, two) // bigN -= 2
 	}
-	return res
+	return total
 }
